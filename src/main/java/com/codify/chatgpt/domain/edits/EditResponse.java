@@ -1,17 +1,16 @@
-package com.codify.chatgpt.domain.qa;
+package com.codify.chatgpt.domain.edits;
 
-import com.codify.chatgpt.domain.other.Choice;
 import com.codify.chatgpt.domain.other.Usage;
 import lombok.Data;
 
+import java.awt.*;
 import java.io.Serializable;
 
 /**
  * @author: Sky
  */
 @Data
-public class QACompletionResponse implements Serializable {
-
+public class EditResponse implements Serializable {
     /** ID */
     private String id;
     /** 对象 */
@@ -25,6 +24,4 @@ public class QACompletionResponse implements Serializable {
     /** 耗材 */
     private Usage usage;
 
-
 }
-

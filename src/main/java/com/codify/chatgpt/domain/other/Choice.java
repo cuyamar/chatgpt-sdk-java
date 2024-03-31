@@ -1,4 +1,4 @@
-package com.codify.chatgpt.domain.qa;
+package com.codify.chatgpt.domain.other;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 对话信息
  */
 @Data
-public class QAChoice implements Serializable {
+public class Choice implements Serializable {
 
     private long index;
     private String text;
@@ -19,3 +19,4 @@ public class QAChoice implements Serializable {
     private String finishReason;
 
 }
+
