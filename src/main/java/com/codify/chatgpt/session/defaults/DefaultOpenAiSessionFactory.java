@@ -1,10 +1,10 @@
-package cn.bugstack.chatgpt.session.defaults;
+package com.codify.chatgpt.session.defaults;
 
-import cn.bugstack.chatgpt.IOpenAiApi;
-import cn.bugstack.chatgpt.interceptor.OpenAiInterceptor;
-import cn.bugstack.chatgpt.session.Configuration;
-import cn.bugstack.chatgpt.session.OpenAiSession;
-import cn.bugstack.chatgpt.session.OpenAiSessionFactory;
+import com.codify.chatgpt.IOpenAiApi;
+import com.codify.chatgpt.interceptor.OpenAiInterceptor;
+import com.codify.chatgpt.session.Configuration;
+import com.codify.chatgpt.session.OpenAiSession;
+import com.codify.chatgpt.session.OpenAiSessionFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -13,12 +13,6 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * @author 小傅哥，微信：fustack
- * @description OpenAi API Factory 会话工厂
- * @github https://github.com/fuzhengwei
- * @Copyright 公众号：bugstack虫洞栈 | 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
 public class DefaultOpenAiSessionFactory implements OpenAiSessionFactory {
 
     private final Configuration configuration;
@@ -31,13 +25,13 @@ public class DefaultOpenAiSessionFactory implements OpenAiSessionFactory {
     public OpenAiSession openSession() {
         // 1. 日志配置
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
 
         // 2. 开启 Http 客户端
         OkHttpClient okHttpClient = new OkHttpClient
                 .Builder()
                 .addInterceptor(httpLoggingInterceptor)
-                .addInterceptor(new OpenAiInterceptor(configuration.getApiKey()))
+                .addInterceptor(new OpenAiInterceptor(configuration.getApiKey(), configuration.getAuthToken()))
                 .connectTimeout(450, TimeUnit.SECONDS)
                 .writeTimeout(450, TimeUnit.SECONDS)
                 .readTimeout(450, TimeUnit.SECONDS)
@@ -55,5 +49,7 @@ public class DefaultOpenAiSessionFactory implements OpenAiSessionFactory {
 
         return new DefaultOpenAiSession(configuration);
     }
+
+
 
 }
